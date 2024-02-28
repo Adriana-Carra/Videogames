@@ -12,6 +12,7 @@ const gamesRoutes = Router();
 gamesRoutes.get("/", async (req, res) => {
     try {
         const games = await getAllGames();
+        
         return res.status(200).json(games);
     } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -33,8 +34,12 @@ gamesRoutes.get("/:id", async (req, res) => {
 gamesRoutes.get("/name", async (req, res) => {
     const { name } = req.query;
     try {
-        const gamesByName = await getGameByName(name);
-        return res.status(200).json(gamesByName);
+        const { apiResults, dbResults } = await getGameByName(name);
+        
+        return res.status(200).json({
+            apiResults,
+            dbResults
+        });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }

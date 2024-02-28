@@ -9,7 +9,7 @@ const { API_KEY } = process.env;
 const getAllGames = async () => {
     try {
         const allGamesDB = await Videogame.findAll({ include: [Genre] });
-            
+                    
         const gamesApi = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)).data;
         const gamesAPIFull = gamesApi.results.map((X) => {
             const game = {
@@ -21,9 +21,9 @@ const getAllGames = async () => {
                 genres: X.genres && X.genres.map((p) => p.name).filter(p => p != null).join(', '),
             };
             return game;
-          })
+        })
         const allGamesApi = gamesAPIFull;
-
+        
         return [...allGamesDB, ...allGamesApi];
     } catch (error) {
         throw new Error(error.message);
@@ -50,16 +50,17 @@ const getGameByName = async (name) => {
         const gamesApi = (await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}&page_size=15`)).data;
         const allGamesApi = infoGet(gamesApi);
 
-        const gamesFiltered = allGamesApi.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()));
+        const gamesFilteredApi = allGamesApi.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()));
 
         const gameInDB = await Videogame.findAll({
             where: { name: { [Op.iLike]: `%${name}%` } },
             limit: 15
         });
 
-        const uniqueGames = Array.from(new Set([...gamesFiltered, ...gameInDB]));
-
-        return uniqueGames;
+        return {
+            apiResults: gamesFilteredApi,
+            dbResults: gameInDB
+        };
     } catch (error) {
         console.error('Error in get games by name:', error.message);
         throw new Error(error.message);
