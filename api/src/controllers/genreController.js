@@ -1,36 +1,43 @@
-require("dotenv").config();
-const { Router } = require('express');
+require('dotenv').config();
 const axios = require('axios');
 const { API_KEY } = process.env;
 
-const { Genre } = require('../db');
+const { Genre } = require('../db.js');
 
-
-// Ruta GET /teams
-const getGenreList = async (id, name, userId) => {
+// Ruta GET /genres
+const getGenreList = async () => {
     try {
-        const genreApi = (await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data;
+        // Comprueba si se ha proporcionado una clave API
+        if (!API_KEY) {
+            throw new Error('API key is missing. Please check your environment variables.');
+        }
+        // Obtener los géneros de la API de Rawg
+        const response = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+        const genreApi = response.data.results;
 
-        const genreArr = genreApi.map((genre) => {
-            return {
-                id: genre.id,
-                name: genre.name,
-            };
-        });
+        // Mapear los géneros de la API para formatearlos adecuadamente
+        const genreArr = genreApi.map((genre) => ({
+            id: genre.id,
+            name: genre.name,
+        }));
 
-        const genreDB = await Genre.findAll({
-            attributes: ["id", "name"]
-        });
+        // Obtener todos los géneros de la base de datos
+        const genreDB = await Genre.findAll({ attributes: ["id", "name"] });
 
-        if (!genreDB.length) {
+        // Verificar si la base de datos está vacía
+        if (genreDB.length === 0) {
+            // Si la base de datos está vacía, guardar los géneros de la API en la base de datos
             await Genre.bulkCreate(genreArr);
         }
 
-        const newGenreDB = await Genre.findAll();
+        // Obtener los géneros actualizados de la base de datos
+        const newGenreDB = await Genre.findAll({ attributes: ["id", "name"] });
 
+        // Devolver los géneros de la API y los géneros de la base de datos
         return { genreArr, newGenreDB };
     } catch (error) {
-        throw new Error(error.message);
+        console.error('Error en getGenreList:', error.message);
+        throw new Error('No se pudo obtener la lista de géneros.');
     }
 };
 
