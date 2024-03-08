@@ -1,0 +1,21 @@
+body {
+    background-image: url("../../../public/backgound-home.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+.navBar-style {
+    border: none;
+    outline: none;
+    padding: 15px;
+    width: 100%;
+    line-height: 30px;
+    margin: 0 auto; /* Centra horizontalmente */
+    text-align: center; /* Alinea el texto al centro */
+    position: fixed; /* Fija la barra de navegación en la parte superior */
+    top: 0; /* Coloca la barra de navegación en la parte superior */
+    z-index: 1000; /* Ajusta el índice Z para que esté por encima de otros elementos */
+    
+}

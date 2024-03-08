@@ -1,0 +1,31 @@
+button {
+    background: #864dfb;
+    color: #f9f9f9;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0 130px;
+  }
+  
+  .swiper .swiper-pagination .swiper-pagination-bullet {
+    box-shadow: none;
+    background: #864dfb;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .swiper-horizontal .swiper-pagination-bullets.swiper-pagination-horizontal {
+    top: auto;
+    bottom: 56px;
+  }
+  
+  .swiper-slide img {
+    height: 170px;
+    margin-bottom: 10px;
+  }

@@ -1,0 +1,18 @@
+.cards-List {
+    width: 85vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+    .cards-List {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Cambia el tamaño mínimo de las tarjetas para pantallas más pequeñas */
+        grid-gap: 10px; /* Reduce el espacio entre tarjetas para pantallas más pequeñas */
+    }
+}

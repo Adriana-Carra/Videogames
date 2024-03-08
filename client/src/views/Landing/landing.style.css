@@ -1,0 +1,68 @@
+@font-face {
+    font-family: '[.ocr-b.pxl8.]';
+    src: url('./ocr-bpxl8.ttf') format('truetype');
+}
+
+.landing-body {
+    background-image: url("./background1.jpg");
+    background-size: cover; /* Ajusta la imagen para cubrir completamente el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; 
+    height: 100vh; /* Asegura que la altura del cuerpo sea igual a la altura de la ventana */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Añade flexbox para centrar verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: flex-start; /* Centra verticalmente el contenido */
+}
+
+.text-effect {
+    margin-top: 40px; 
+    font-family: '[.ocr-b.pxl8.]', sans-serif;
+    font-size: 5vw; 
+    text-transform: uppercase;
+    color: #afcce3;
+    text-shadow: 2px 2px 2px rgba(182, 230, 235, 0.75),
+    2px -2px 2px rgba(182, 230, 235, 0.75),
+    -2px 2px 2px rgba(182, 230, 235, 0.75),
+    -2px -2px 2px rgba(182, 230, 235, 0.75);
+    letter-spacing: 0.1em; 
+    font-weight: 400;
+}
+
+.btn {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: #15dfdb;
+    padding: 0.3em 0.8em; /* Tamaño de relleno más pequeño */
+    font-size: 1.8vw; /* Tamaño de fuente un poco más pequeño */
+    color: #6e1111cf;
+    font-weight: 700;
+    border-radius: 0.2em; /* Bordes redondeados ajustados */
+    text-transform: uppercase;
+    margin: auto;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    top: 70%; /* Mover el botón más hacia abajo */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn:hover {
+    background: transparent;
+    box-shadow: 0 0 0.5em 0.1em #319b9b; /* Ajuste de la sombra */
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    .text-effect {
+        font-size: 16px; /* Ajusta el tamaño de fuente fijo para pantallas más pequeñas */
+        letter-spacing: 0.1em; /* Reducir el espaciado entre letras para mejorar la legibilidad */
+    }
+    
+    .btn {
+        padding: 0.5em 1em; /* Ajusta el tamaño del botón para pantallas más pequeñas */
+        font-size: 14px; /* Ajusta el tamaño de fuente fijo del botón para pantallas más pequeñas */
+        box-shadow: 0 0 0.1em 0.1em #319b9b; /* Ajusta la sombra del botón para pantallas más pequeñas */
+    }
+}
